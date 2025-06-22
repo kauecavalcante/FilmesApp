@@ -1,43 +1,35 @@
-import { View, Image, StyleSheet } from 'react-native';
 import { useEffect } from 'react';
-import { useRouter } from 'expo-router';
-import { StatusBar } from 'expo-status-bar';
+import { useRouter, useSegments } from 'expo-router';
+import { onAuthStateChanged } from 'firebase/auth';
+import { auth } from '../src/services/firebaseConfig';
+import Splash from './_splash'; 
 
-export default function SplashScreen() {
+export default function Index() {
   const router = useRouter();
+  const segments = useSegments();
 
   useEffect(() => {
     
-    const timer = setTimeout(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
       
-      router.replace('/home'); 
-    }, 2500);
+      const inAuthGroup = segments[0] === '(auth)'; 
+      const inAppGroup = segments[0] === '(tabs)';
 
-    
-    return () => clearTimeout(timer);
+      if (user) {
+       
+        if (!inAppGroup) {
+          router.replace('/(tabs)/home');
+        }
+      } else {
+        
+        router.replace('/onboarding');
+      }
+    });
+
+   
+    return () => unsubscribe();
   }, [router]); 
 
-  return (
-    <View style={styles.container}>
-      <StatusBar style="light" />
-      <Image
-        source={require('../assets/images/splash-icon.png')} 
-        style={styles.logo}
-      />
-    </View>
-  );
+  
+  return <Splash />;
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#242A32',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  logo: {
-    width: 200,
-    height: 200,
-    resizeMode: 'contain',
-  },
-});

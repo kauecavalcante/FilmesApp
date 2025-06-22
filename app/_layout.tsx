@@ -1,32 +1,17 @@
-import { Stack, useRouter } from 'expo-router';
-import { TouchableOpacity } from 'react-native';
-import { AntDesign } from '@expo/vector-icons';
+import { Stack } from 'expo-router';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 export default function RootLayout() {
-  const router = useRouter();
-
   return (
-    <Stack>
-     
-      <Stack.Screen name="index" options={{ headerShown: false }} />
-
-      
-      <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-      
-      <Stack.Screen 
-        name="movie/[id]" 
-        options={{ 
-          title: 'Detalhes',
-          headerTransparent: true,
-          headerTintColor: '#FFF',
-          headerTitleAlign: 'center',
-          headerLeft: () => (
-            <TouchableOpacity onPress={() => router.back()} style={{ marginLeft: 15 }}>
-              <AntDesign name="left" size={24} color="white" />
-            </TouchableOpacity>
-          ),
-        }} 
-      />
-    </Stack>
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <Stack screenOptions={{ headerShown: false }}>
+        <Stack.Screen name="index" />
+        <Stack.Screen name="onboarding" />
+        <Stack.Screen name="login" />
+        <Stack.Screen name="register" />
+        <Stack.Screen name="(tabs)" />
+        <Stack.Screen name="movie/[id]" />
+      </Stack>
+    </GestureHandlerRootView>
   );
 }
