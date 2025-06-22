@@ -1,0 +1,51 @@
+# Arquivos de Log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+
+# Diretório de dependências
+# A pasta mais importante a ser ignorada.
+# Pode ser facilmente recriada com 'npm install'.
+node_modules/
+
+# Arquivos de build e bundles
+dist/
+build/
+web-build/
+*.jks
+*.keystore
+
+# Arquivos específicos do Expo
+# Caches e configurações locais do Expo que não devem ser versionados.
+.expo/
+.expo-shared/
+
+# Arquivos de Variáveis de Ambiente
+# EXTREMAMENTE IMPORTANTE para não expor suas chaves de API no GitHub!
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Arquivos gerados pelo Sistema Operacional
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Pastas de configuração de Editores e IDEs
+.idea/
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Arquivos diversos
+*.pem
