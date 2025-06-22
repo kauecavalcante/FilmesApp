@@ -1,6 +1,6 @@
 import React from 'react';
-import { StyleSheet, FlatList, Image, TouchableOpacity } from 'react-native';
-import { Link } from 'expo-router'; 
+import { StyleSheet, FlatList, Image, TouchableOpacity, Dimensions } from 'react-native'; // 1. Importar o Dimensions
+import { Link } from 'expo-router';
 
 interface Movie {
   id: number;
@@ -11,14 +11,27 @@ interface MovieGridProps {
   movies: Movie[];
 }
 
+
+const NUM_COLUMNS = 3;
+const PADDING_HORIZONTAL = 15;
+const MARGIN_ITEM = 5;
+
+
+const screenWidth = Dimensions.get('window').width;
+
+const availableWidth = screenWidth - (PADDING_HORIZONTAL * 2);
+
+const itemWidth = (availableWidth / NUM_COLUMNS) - (MARGIN_ITEM * 2);
+
+
+
 export default function MovieGrid({ movies }: MovieGridProps) {
   return (
     <FlatList
       data={movies}
       keyExtractor={(item) => item.id.toString()}
-      numColumns={3}
+      numColumns={NUM_COLUMNS}
       renderItem={({ item }) => (
-
         <Link href={`/movie/${item.id}`} asChild>
           <TouchableOpacity style={styles.posterContainer}>
             <Image
@@ -35,11 +48,11 @@ export default function MovieGrid({ movies }: MovieGridProps) {
 
 const styles = StyleSheet.create({
   container: {
-    paddingHorizontal: 15,
+    paddingHorizontal: PADDING_HORIZONTAL,
   },
   posterContainer: {
-    flex: 1,
-    margin: 5,
+    width: itemWidth,
+    margin: MARGIN_ITEM,
   },
   poster: {
     width: '100%',

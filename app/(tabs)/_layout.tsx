@@ -1,6 +1,7 @@
 import React from 'react';
 import { Tabs } from 'expo-router';
 import { AntDesign, Feather } from '@expo/vector-icons';
+import { Platform } from 'react-native';
 
 export default function TabsLayout() {
   return (
@@ -11,15 +12,13 @@ export default function TabsLayout() {
         tabBarStyle: {
           backgroundColor: '#242A32',
           borderTopWidth: 0,
-          
-          height: 90, 
-          paddingTop: 10, 
-          paddingBottom: 15, 
+          height: 100, 
+          paddingBottom: Platform.OS === 'android' ? 30 : 40, 
+          paddingTop: 10,
         },
-        
         tabBarLabelStyle: {
-          fontSize: 14,
-          fontWeight: '600',
+          fontSize: 12,
+          fontWeight: '500',
         },
         headerShown: false, 
       }}
@@ -29,10 +28,9 @@ export default function TabsLayout() {
         options={{
           title: 'Home',
           tabBarIcon: ({ color }) => (
-            
             <AntDesign 
               name="home" 
-              size={32} 
+              size={28} 
               color={color} 
             />
           ),
@@ -45,7 +43,7 @@ export default function TabsLayout() {
           tabBarIcon: ({ color }) => (
             <Feather 
               name="search" 
-              size={32} 
+              size={28} 
               color={color} 
             />
           ),
@@ -58,7 +56,7 @@ export default function TabsLayout() {
           tabBarIcon: ({ color }) => (
             <Feather 
               name="bookmark" 
-              size={32} 
+              size={28} 
               color={color} 
             />
           ),

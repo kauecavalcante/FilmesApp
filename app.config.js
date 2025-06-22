@@ -4,6 +4,7 @@ module.exports = {
   expo: {
     name: "FilmesApp",
     slug: "FilmesApp",
+    scheme: "filmesapp",
     version: "1.0.0",
     orientation: "portrait",
     icon: "./assets/icon.png",
